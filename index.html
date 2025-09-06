@@ -26,30 +26,63 @@
     <input type="email" id="email" name="email" placeholder="Your email address" required>
     <br>
     <button type="submit" class="btn">Join Waitlist →</button>
+<form id="beta-form">
+    <input type="email" id="email" name="email" placeholder="Your email address" required>
+    <br>
+    <button type="submit" class="btn" id="submit-btn">Join Waitlist →</button>
+    
+    <!-- This div will show status messages to the user -->
+    <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
 </form>
 
 <!-- Load EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    // Initialize EmailJS with your Public Key
-    (function() {
-        emailjs.init("zNY9PoWqX-kafuu-7); // <-- REPLACE THIS WITH YOUR REAL PUBLIC KEY
-    })();
+    // Initialize EmailJS with your PUBLIC KEY
+    emailjs.init("YOUR_PUBLIC_KEY_HERE"); // <-- REPLACE WITH YOUR KEY
 
-    // Handle form submission
-    document.getElementById('beta-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Stop the form from reloading the page
+    const form = document.getElementById('beta-form');
+    const statusDiv = document.getElementById('form-status');
+    const submitButton = document.getElementById('submit-btn');
 
-        // Send the email
-        emailjs.sendForm('service_o1ssjtp', 'template_8odhskh', this) // <-- REPLACE THESE IDs
-            .then(function() {
-                // Success! Redirect to thank you page.
-                window.location.href = 'thankyou.html';
-            }, function(error) {
-                // Error! Alert the user (you can make this prettier later)
-                alert('Oops! Something went wrong. Please try again.');
-                console.error('EmailJS Error:', error);
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Stop the page from reloading
+        
+        // Get the current date and time
+        const now = new Date();
+        const signupDate = now.toLocaleString();
+        const userEmail = document.getElementById('email').value;
+
+        // Show "Sending..." message and disable the button to prevent double-clicks
+        statusDiv.style.color = 'blue';
+        statusDiv.textContent = 'Sending your request...';
+        submitButton.disabled = true;
+
+        try {
+            // Send the email
+            const response = await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                email: userEmail,
+                date: signupDate
             });
+
+            console.log('SUCCESS!', response);
+            
+            // Show success message for a moment before redirecting
+            statusDiv.style.color = 'green';
+            statusDiv.textContent = 'Success! Redirecting you...';
+            
+            // Wait 1.5 seconds so the user can read the message, then redirect
+            setTimeout(() => {
+                window.location.href = 'thankyou.html';
+            }, 1500);
+
+        } catch (error) {
+            // Show error message and re-enable the button
+            console.error('FAILED...', error);
+            statusDiv.style.color = 'red';
+            statusDiv.textContent = 'Oops! Something went wrong. Please try again.';
+            submitButton.disabled = false; // Let them try again
+        }
     });
 </script>
         <p>🚀 For founders | 🔍 For testers</p>
