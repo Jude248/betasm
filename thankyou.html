@@ -2,14 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Thank You!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - BetaSM</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 50px; background: linear-gradient(to bottom, #4f46e5, #7c3aed); color: white; }
-        h1 { font-size: 2.5rem; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background: linear-gradient(to bottom, #4f46e5, #7c3aed); color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { max-width: 500px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .logo { font-weight: bold; font-size: 3rem; margin-bottom: 20px; display: block; }
+        .tagline { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        .btn { background: white; color: #7c3aed; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin: 10px; border: none; cursor: pointer; transition: transform 0.2s; }
+        .btn:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body>
-    <h1>🎉 Welcome to the Squad!</h1>
-    <p>We'll be in touch soon with early access.</p>
+    <div class="container">
+        <span class="logo">BetaSM</span>
+        <h1>🎉 Welcome to the Squad!</h1>
+        <p class="tagline">Thank you for joining the BetaSM waitlist. We'll be in touch soon with early access.</p>
+        <a href="index.html" class="btn">Go Back Home</a>
+    </div>
 </body>
 </html>
