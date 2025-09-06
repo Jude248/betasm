@@ -12,8 +12,10 @@
         .tagline { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
         .btn { background: white; color: #7c3aed; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin: 10px; border: none; cursor: pointer; transition: transform 0.2s; }
         .btn:hover { transform: translateY(-3px); }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
         form { margin-top: 20px; }
         input { padding: 15px; width: 300px; border: none; border-radius: 50px; margin-bottom: 15px; }
+        #form-status { margin-top: 20px; min-height: 24px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -22,70 +24,65 @@
         <h1>Find Your First Beta Testers</h1>
         <p class="tagline">Launch your product to a curated community of early adopters eager to give feedback.</p>
         
-     <form id="beta-form">
-    <input type="email" id="email" name="email" placeholder="Your email address" required>
-    <br>
-    <button type="submit" class="btn">Join Waitlist →</button>
-<form id="beta-form">
-    <input type="email" id="email" name="email" placeholder="Your email address" required>
-    <br>
-    <button type="submit" class="btn" id="submit-btn">Join Waitlist →</button>
-    
-    <!-- This div will show status messages to the user -->
-    <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
-</form>
-
-<!-- Load EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-    // Initialize EmailJS with your PUBLIC KEY
-    emailjs.init("zNY9PoWqX-kafuu-7"); // <-- REPLACE WITH YOUR KEY
-
-    const form = document.getElementById('beta-form');
-    const statusDiv = document.getElementById('form-status');
-    const submitButton = document.getElementById('submit-btn');
-
-    form.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Stop the page from reloading
-        
-        // Get the current date and time
-        const now = new Date();
-        const signupDate = now.toLocaleString();
-        const userEmail = document.getElementById('email').value;
-
-        // Show "Sending..." message and disable the button to prevent double-clicks
-        statusDiv.style.color = 'blue';
-        statusDiv.textContent = 'Sending your request...';
-        submitButton.disabled = true;
-
-        try {
-            // Send the email
-            const response = await emailjs.send("service_nc2c7e8", "template_8odhskh", {
-                email: userEmail,
-                date: signupDate
-            });
-
-            console.log('SUCCESS!', response);
+        <form id="beta-form">
+            <input type="email" id="email" name="email" placeholder="Your email address" required>
+            <br>
+            <button type="submit" class="btn" id="submit-btn">Join Waitlist →</button>
             
-            // Show success message for a moment before redirecting
-            statusDiv.style.color = 'green';
-            statusDiv.textContent = 'Success! Redirecting you...';
-            
-            // Wait 1.5 seconds so the user can read the message, then redirect
-            setTimeout(() => {
-                window.location.href = 'thankyou.html';
-            }, 1500);
-
-        } catch (error) {
-            // Show error message and re-enable the button
-            console.error('FAILED...', error);
-            statusDiv.style.color = 'red';
-            statusDiv.textContent = 'Oops! Something went wrong. Please try again.';
-            submitButton.disabled = false; // Let them try again
-        }
-    });
-</script>
+            <div id="form-status"></div>
+        </form>
         <p>🚀 For founders | 🔍 For testers</p>
     </div>
+
+    <!-- Load EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your Public Key
+        emailjs.init("zNY9PoWqX-kafuu-7"); // REPLACE THIS WITH YOUR REAL PUBLIC KEY
+
+        const form = document.getElementById('beta-form');
+        const statusDiv = document.getElementById('form-status');
+        const submitButton = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Stop the page from reloading
+            
+            // Get the current date and time
+            const now = new Date();
+            const signupDate = now.toLocaleString();
+            const userEmail = document.getElementById('email').value;
+
+            // Show "Sending..." message and disable the button to prevent double-clicks
+            statusDiv.style.color = 'white';
+            statusDiv.textContent = 'Sending your request...';
+            submitButton.disabled = true;
+
+            try {
+                // Send the email
+                const response = await emailjs.send("service_nc2c7e8", "template_8odhskh", { // REPLACE THESE IDs
+                    email: userEmail,
+                    date: signupDate
+                });
+
+                console.log('SUCCESS!', response);
+                
+                // Show success message for a moment before redirecting
+                statusDiv.style.color = 'lightgreen';
+                statusDiv.textContent = 'Success! Redirecting you...';
+                
+                // Wait 1.5 seconds so the user can read the message, then redirect
+                setTimeout(() => {
+                    window.location.href = 'thankyou.html';
+                }, 1500);
+
+            } catch (error) {
+                // Show error message and re-enable the button
+                console.error('FAILED...', error);
+                statusDiv.style.color = '#ff6b6b';
+                statusDiv.textContent = 'Oops! Something went wrong. Please try again.';
+                submitButton.disabled = false; // Let them try again
+            }
+        });
+    </script>
 </body>
 </html>
