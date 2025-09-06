@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetaSM - Find Your First Beta Testers</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background: linear-gradient(to bottom, #4f46e5, #7c3aed); color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { max-width: 500px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .logo { font-weight: bold; font-size: 3rem; margin-bottom: 20px; display: block; }
+        .tagline { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        .btn { background: white; color: #7c3aed; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin: 10px; border: none; cursor: pointer; transition: transform 0.2s; }
+        .btn:hover { transform: translateY(-3px); }
+        form { margin-top: 20px; }
+        input { padding: 15px; width: 300px; border: none; border-radius: 50px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="logo">BetaSM</span>
+        <h1>Find Your First Beta Testers</h1>
+        <p class="tagline">Launch your product to a curated community of early adopters eager to give feedback.</p>
+        
+        <form action="https://formsubmit.co/your-email@gmail.com" method="POST">
+            <input type="email" name="email" placeholder="Your email address" required>
+            <input type="hidden" name="_next" value="https://yourusername.github.io/betasm/thankyou.html">
+            <input type="hidden" name="_subject" value="New BetaSM Waitlist Signup!">
+            <br>
+            <button type="submit" class="btn">Join Waitlist →</button>
+        </form>
+        <p>🚀 For founders | 🔍 For testers</p>
+    </div>
+</body>
+</html>
