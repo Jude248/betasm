@@ -39,7 +39,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
     // Initialize EmailJS with your PUBLIC KEY
-    emailjs.init("YOUR_PUBLIC_KEY_HERE"); // <-- REPLACE WITH YOUR KEY
+    emailjs.init("zNY9PoWqX-kafuu-7"); // <-- REPLACE WITH YOUR KEY
 
     const form = document.getElementById('beta-form');
     const statusDiv = document.getElementById('form-status');
@@ -60,7 +60,7 @@
 
         try {
             // Send the email
-            const response = await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+            const response = await emailjs.send("service_nc2c7e8", "template_8odhskh", {
                 email: userEmail,
                 date: signupDate
             });
