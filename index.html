@@ -22,13 +22,36 @@
         <h1>Find Your First Beta Testers</h1>
         <p class="tagline">Launch your product to a curated community of early adopters eager to give feedback.</p>
         
-        <form action="https://formsubmit.co/your-email@gmail.com" method="POST">
-            <input type="email" name="email" placeholder="Your email address" required>
-            <input type="hidden" name="_next" value="https://yourusername.github.io/betasm/thankyou.html">
-            <input type="hidden" name="_subject" value="New BetaSM Waitlist Signup!">
-            <br>
-            <button type="submit" class="btn">Join Waitlist →</button>
-        </form>
+     <form id="beta-form">
+    <input type="email" id="email" name="email" placeholder="Your email address" required>
+    <br>
+    <button type="submit" class="btn">Join Waitlist →</button>
+</form>
+
+<!-- Load EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS with your Public Key
+    (function() {
+        emailjs.init("zNY9PoWqX-kafuu-7); // <-- REPLACE THIS WITH YOUR REAL PUBLIC KEY
+    })();
+
+    // Handle form submission
+    document.getElementById('beta-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Stop the form from reloading the page
+
+        // Send the email
+        emailjs.sendForm('service_o1ssjtp', 'template_8odhskh', this) // <-- REPLACE THESE IDs
+            .then(function() {
+                // Success! Redirect to thank you page.
+                window.location.href = 'thankyou.html';
+            }, function(error) {
+                // Error! Alert the user (you can make this prettier later)
+                alert('Oops! Something went wrong. Please try again.');
+                console.error('EmailJS Error:', error);
+            });
+    });
+</script>
         <p>🚀 For founders | 🔍 For testers</p>
     </div>
 </body>
